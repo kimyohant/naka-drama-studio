@@ -15,6 +15,7 @@ export interface MarketerJobStatus {
   failed?: number
   current_key?: string | null
   error_msg?: string | null
+  error_code?: string | null
   result?: any
 }
 

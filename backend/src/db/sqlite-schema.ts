@@ -480,6 +480,9 @@ const MIGRATIONS: Array<{ version: number; columns: Array<{ table: string; colum
     )`,
     'CREATE INDEX IF NOT EXISTS idx_campaign_creatives_campaign ON campaign_creatives (campaign_id)',
   ] },
+  { version: 7, columns: [
+    { table: 'pipeline_tasks', column: 'error_code', ddl: 'ALTER TABLE pipeline_tasks ADD COLUMN error_code TEXT' },
+  ] },
 ]
 
 export function initSqliteSchema(sqlite: Database.Database) {

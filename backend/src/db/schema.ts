@@ -57,6 +57,7 @@ export const pipelineTasks = sqliteTable('pipeline_tasks', {
   failed: integer('failed').default(0),
   currentKey: text('current_key'),
   errorMsg: text('error_msg'),
+  errorCode: text('error_code'),
   cancelRequested: integer('cancel_requested').default(0),
   createdAt: text('created_at').notNull(),
   updatedAt: text('updated_at').notNull(),

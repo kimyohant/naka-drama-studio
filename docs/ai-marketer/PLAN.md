@@ -86,6 +86,7 @@ Conventions (same as the rest of the repo):
   "total": 4, "completed": 2, "failed": 0,
   "current_key": "persona",           // current sub-step or null
   "error_msg": null,                  // string when status=error
+  "error_code": null,                 // AppError.errorCode when status=error (เช่น E_NO_TEXT_MODEL) → UI แปลผ่าน errors.codes.*
   "result": null                      // step payload once done (per-step shape below)
 }
 ```

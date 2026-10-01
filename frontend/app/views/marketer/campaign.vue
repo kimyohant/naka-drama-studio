@@ -489,7 +489,7 @@ async function poll(kind: 'research' | 'strategy' | 'creatives', fetchStatus: ()
       await refresh()
       onDone?.()
     } else if (final.status === 'error') {
-      toast.error(final.error_msg || t('errors.unknown'))
+      toastJobError(final)
       await refresh()
     } else if (final.status === 'cancelled') {
       toast.info(t('marketer.job.cancelled'))
@@ -500,6 +500,11 @@ async function poll(kind: 'research' | 'strategy' | 'creatives', fetchStatus: ()
     toastError(e)
     await refresh()
   }
+}
+
+/** งาน async จบด้วย error → แปลผ่าน error_code (errors.codes.*) ก่อนเสมอ ไม่ใช่โชว์ error_msg raw */
+function toastJobError(final: MarketerJobStatus) {
+  toastError(Object.assign(new Error(final.error_msg ?? ''), { errorCode: final.error_code || undefined }))
 }
 
 async function cancelJob(kind: 'research' | 'strategy' | 'creatives' | 'refine', docId?: number) {
@@ -541,7 +546,7 @@ async function refineDoc() {
       toast.success(t('marketer.strategy.refineDone'))
       await refresh()
     } else if (final.status === 'error') {
-      toast.error(final.error_msg || t('errors.unknown'))
+      toastJobError(final)
     } else if (final.status === 'cancelled') {
       toast.info(t('marketer.job.cancelled'))
     }

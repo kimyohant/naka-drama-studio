@@ -22,6 +22,7 @@ export interface PipelineTaskRow {
   failed: number
   currentKey: string | null
   errorMsg: string | null
+  errorCode: string | null
   cancelRequested: number
   createdAt: string
   updatedAt: string
@@ -51,6 +52,7 @@ function toRow(r: Row): PipelineTaskRow {
     failed: r.failed || 0,
     currentKey: r.currentKey,
     errorMsg: r.errorMsg,
+    errorCode: r.errorCode,
     cancelRequested: r.cancelRequested || 0,
     createdAt: r.createdAt,
     updatedAt: r.updatedAt,
@@ -83,6 +85,7 @@ export async function startTask(params: {
       failed: 0,
       currentKey: null,
       errorMsg: null,
+      errorCode: null,
       cancelRequested: 0,
       finishedAt: null,
       updatedAt: ts,
@@ -124,6 +127,7 @@ export async function updateTask(key: string, patch: Partial<{
   failed: number
   currentKey: string | null
   errorMsg: string | null
+  errorCode: string | null
   finishedAt: string
 }>) {
   await db.update(schema.pipelineTasks).set({ ...patch, updatedAt: now() })

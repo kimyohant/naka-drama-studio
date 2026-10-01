@@ -158,7 +158,7 @@ export async function startResearchJob(campaign: CampaignRow, opts: { model?: st
     await setCampaignStatus(campaign.id, 'done')
     logTaskSuccess('Campaign', 'research', { campaignId: campaign.id, chars: content.length })
   })().catch(async (err: any) => {
-    await updateTask(key, { status: 'error', errorMsg: err?.message || 'research failed', finishedAt: now() })
+    await updateTask(key, { status: 'error', errorMsg: err?.message || 'research failed', errorCode: err?.errorCode || null, finishedAt: now() })
     await setCampaignStatus(campaign.id, 'error')
     logTaskError('Campaign', 'research', { campaignId: campaign.id, error: err?.message })
   })
@@ -214,7 +214,7 @@ export async function startStrategyJob(campaign: CampaignRow, opts: { model?: st
     await setCampaignStatus(campaign.id, 'done')
     logTaskSuccess('Campaign', 'strategy', { campaignId: campaign.id, docs: completed })
   })().catch(async (err: any) => {
-    await updateTask(key, { status: 'error', errorMsg: err?.message || 'strategy failed', finishedAt: now() })
+    await updateTask(key, { status: 'error', errorMsg: err?.message || 'strategy failed', errorCode: err?.errorCode || null, finishedAt: now() })
     await setCampaignStatus(campaign.id, 'error')
     logTaskError('Campaign', 'strategy', { campaignId: campaign.id, error: err?.message })
   })
@@ -259,7 +259,7 @@ export async function startCreativesJob(
     await setCampaignStatus(campaign.id, 'done')
     logTaskSuccess('Campaign', 'creatives', { campaignId: campaign.id, creatives: completed })
   })().catch(async (err: any) => {
-    await updateTask(key, { status: 'error', errorMsg: err?.message || 'creatives failed', finishedAt: now() })
+    await updateTask(key, { status: 'error', errorMsg: err?.message || 'creatives failed', errorCode: err?.errorCode || null, finishedAt: now() })
     await setCampaignStatus(campaign.id, 'error')
     logTaskError('Campaign', 'creatives', { campaignId: campaign.id, error: err?.message })
   })
@@ -290,7 +290,7 @@ export async function startRefineJob(
     await setCampaignStatus(campaign.id, 'done')
     logTaskSuccess('Campaign', `refine:${doc.kind}`, { campaignId: campaign.id, chars: content.length })
   })().catch(async (err: any) => {
-    await updateTask(key, { status: 'error', errorMsg: err?.message || 'refine failed', finishedAt: now() })
+    await updateTask(key, { status: 'error', errorMsg: err?.message || 'refine failed', errorCode: err?.errorCode || null, finishedAt: now() })
     await setCampaignStatus(campaign.id, 'error')
     logTaskError('Campaign', 'refine', { campaignId: campaign.id, docId: doc.id, error: err?.message })
   })
@@ -307,6 +307,8 @@ export type CampaignJobStatus = {
   failed?: number
   current_key?: string | null
   error_msg?: string | null
+  /** รหัสข้อผิดพลาดเสถียร (AppError.errorCode เช่น E_NO_TEXT_MODEL) → frontend แปลผ่าน errors.codes.* */
+  error_code?: string | null
   result?: null
 }
 
@@ -321,6 +323,7 @@ export async function getJobStatus(key: string, kind: string): Promise<CampaignJ
     failed: row.failed || 0,
     current_key: row.status === 'running' ? row.currentKey : null,
     error_msg: row.status === 'error' ? row.errorMsg : null,
+    error_code: row.status === 'error' ? row.errorCode : null,
     result: null,
   }
 }
