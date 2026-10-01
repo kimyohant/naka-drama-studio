@@ -442,6 +442,44 @@ const MIGRATIONS: Array<{ version: number; columns: Array<{ table: string; colum
     { table: 'sys_task', column: 'estimated_cost_thb', ddl: 'ALTER TABLE sys_task ADD COLUMN estimated_cost_thb REAL' },
     { table: 'sys_task', column: 'source_snapshot', ddl: 'ALTER TABLE sys_task ADD COLUMN source_snapshot TEXT' },
   ] },
+  { version: 6, columns: [], statements: [
+    `CREATE TABLE IF NOT EXISTS campaigns (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      title TEXT,
+      goal TEXT NOT NULL,
+      brand_context TEXT,
+      platform TEXT,
+      language TEXT,
+      status TEXT NOT NULL DEFAULT 'draft',
+      research TEXT,
+      created_at TEXT NOT NULL,
+      updated_at TEXT NOT NULL
+    )`,
+    `CREATE TABLE IF NOT EXISTS campaign_docs (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      campaign_id INTEGER NOT NULL,
+      kind TEXT NOT NULL,
+      title TEXT NOT NULL,
+      content TEXT NOT NULL,
+      version INTEGER NOT NULL DEFAULT 1,
+      updated_at TEXT NOT NULL,
+      UNIQUE (campaign_id, kind)
+    )`,
+    'CREATE INDEX IF NOT EXISTS idx_campaign_docs_campaign ON campaign_docs (campaign_id)',
+    `CREATE TABLE IF NOT EXISTS campaign_creatives (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      campaign_id INTEGER NOT NULL,
+      format TEXT NOT NULL,
+      headline TEXT NOT NULL,
+      hook TEXT,
+      script TEXT NOT NULL,
+      approved INTEGER NOT NULL DEFAULT 0,
+      version INTEGER NOT NULL DEFAULT 1,
+      created_at TEXT NOT NULL,
+      updated_at TEXT NOT NULL
+    )`,
+    'CREATE INDEX IF NOT EXISTS idx_campaign_creatives_campaign ON campaign_creatives (campaign_id)',
+  ] },
 ]
 
 export function initSqliteSchema(sqlite: Database.Database) {

@@ -341,3 +341,41 @@ export const appSettings = sqliteTable('app_settings', {
   value: text('value').notNull(),
   updatedAt: text('updated_at').notNull(),
 })
+
+export const campaigns = sqliteTable('campaigns', {
+  id: integer('id').primaryKey({ autoIncrement: true }),
+  title: text('title'),
+  goal: text('goal').notNull(),
+  brandContext: text('brand_context'),
+  platform: text('platform'),
+  language: text('language'),
+  status: text('status').notNull().default('draft'),
+  // JSON: { content: string, highlights?: string[] }
+  research: text('research'),
+  createdAt: text('created_at').notNull(),
+  updatedAt: text('updated_at').notNull(),
+})
+
+export const campaignDocs = sqliteTable('campaign_docs', {
+  id: integer('id').primaryKey({ autoIncrement: true }),
+  campaignId: integer('campaign_id').notNull(),
+  kind: text('kind').notNull(),
+  title: text('title').notNull(),
+  content: text('content').notNull(),
+  version: integer('version').notNull().default(1),
+  updatedAt: text('updated_at').notNull(),
+})
+// UNIQUE (campaign_id, kind) บังคับที่ DDL (migration 6) แล้ว — ไม่ประกาศซ้ำที่ Drizzle layer
+
+export const campaignCreatives = sqliteTable('campaign_creatives', {
+  id: integer('id').primaryKey({ autoIncrement: true }),
+  campaignId: integer('campaign_id').notNull(),
+  format: text('format').notNull(),
+  headline: text('headline').notNull(),
+  hook: text('hook'),
+  script: text('script').notNull(),
+  approved: integer('approved', { mode: 'boolean' }).notNull().default(false),
+  version: integer('version').notNull().default(1),
+  createdAt: text('created_at').notNull(),
+  updatedAt: text('updated_at').notNull(),
+})

@@ -24,6 +24,7 @@ import props from './routes/props.js'
 import settings from './routes/settings.js'
 import storage from './routes/storage.js'
 import serverUpdate from './routes/serverUpdate.js'
+import campaigns from './routes/campaigns.js'
 import { requestLogger, errorHandler } from './middleware/logger.js'
 import { failStaleRunningTasks } from './services/pipeline-tasks.js'
 import { recoverGenerationTasks } from './services/generation.js'
@@ -101,6 +102,7 @@ api.route('/props', props)
 api.route('/storage', storage)
 api.route('/settings', settings)
 api.route('/server-update', serverUpdate)
+api.route('/campaigns', campaigns)
 
 app.route('/api/v1', api)
 
