@@ -38,7 +38,8 @@
       "home": "Drama Studio",
       "setup": "Setup",
       "openMenu": "Open menu",
-      "closeMenu": "Close menu"
+      "closeMenu": "Close menu",
+      "marketer": "AI Marketer"
     },
     "banner": {
       "missing": "{types} model not configured yet. AI features are unavailable.",
@@ -1056,7 +1057,13 @@
       "E_NO_VIDEO_CONFIG": "No active video service — add one in Settings → AI Services first",
       "E_EPISODE_NO_SCRIPT": "This episode has no script yet — write or paste one before the next step",
       "E_AGENT_UNAVAILABLE": "This agent is not available yet",
-      "E_AGENT_EMPTY_RESULT": "AI returned an empty result — try again"
+      "E_AGENT_EMPTY_RESULT": "AI returned an empty result — try again",
+      "E_CAMPAIGN_NOT_FOUND": "Campaign not found — it may have been deleted",
+      "E_CAMPAIGN_JOB_RUNNING": "Another AI job for this campaign is already running — wait or cancel it first",
+      "E_CAMPAIGN_EMPTY_GOAL": "Please describe the marketing goal first",
+      "E_CAMPAIGN_NO_RESEARCH": "Run market research before generating the strategy",
+      "E_CAMPAIGN_NO_DOCS": "Generate the strategy docs before creating creatives",
+      "E_CAMPAIGN_EMPTY_INSTRUCTION": "Tell AI what to change before refining"
     }
   },
   "tour": {
@@ -1166,5 +1173,157 @@
     "needEpisode": "At least one episode is required before generating images (configs are locked per episode)",
     "mergedEpisode": "Merged episode video",
     "noVideoYet": "No video for this shot yet"
+  },
+  "marketer": {
+    "eyebrow": "NAKA-AI TECH",
+    "title": "AI Marketer",
+    "subtitle": "Describe your goal → market research → 4 strategy docs → creatives → review & refine",
+    "list": {
+      "newCampaign": "New campaign",
+      "openAria": "Open campaign {title}",
+      "delete": "Delete campaign",
+      "emptyTitle": "No campaigns yet",
+      "emptyDesc": "Create your first campaign: describe the marketing goal and let AI research, plan strategy, and draft creatives."
+    },
+    "create": {
+      "untitled": "Untitled campaign",
+      "title": "Create a marketing campaign",
+      "desc": "Describe the goal clearly — AI will research, plan the strategy, and draft creatives.",
+      "titleField": "Campaign name",
+      "titlePlaceholder": "e.g. New iced-tea flavor launch",
+      "goal": "Marketing goal",
+      "goalPlaceholder": "e.g. Grow online sales 30% in 2 months for ages 18-25 on TikTok",
+      "brandContext": "Brand / product context (optional)",
+      "brandPlaceholder": "Products, selling points, pricing, audience, channels, what worked before…",
+      "platform": "Main platform",
+      "language": "Content language",
+      "creating": "Creating…",
+      "submit": "Create campaign",
+      "goalRequired": "Please describe the marketing goal",
+      "created": "Campaign created"
+    },
+    "platform": {
+      "tiktok": "TikTok",
+      "instagram": "Instagram",
+      "youtube": "YouTube",
+      "facebook": "Facebook",
+      "xiaohongshu": "Xiaohongshu"
+    },
+    "language": {
+      "th": "Thai",
+      "en": "English",
+      "zh": "Chinese"
+    },
+    "status": {
+      "draft": "Draft",
+      "running": "Running",
+      "done": "Done",
+      "error": "Error"
+    },
+    "delete": {
+      "title": "Delete campaign",
+      "message": "Delete “{title}” with all strategy docs and creatives? This cannot be undone.",
+      "deleted": "Campaign deleted"
+    },
+    "stages": {
+      "goal": "Goal",
+      "goalSub": "Describe what you want",
+      "research": "Research",
+      "researchSub": "Market, audience, rivals",
+      "strategy": "Strategy",
+      "strategySub": "4 documents",
+      "creatives": "Creatives",
+      "creativesSub": "Ad scripts",
+      "review": "Review & Refine",
+      "reviewSub": "Check, approve, export"
+    },
+    "goal": {
+      "title": "Campaign goal",
+      "desc": "Edit campaign info any time. When ready, let AI run the market research.",
+      "startResearch": "Start research",
+      "saved": "Goal saved"
+    },
+    "research": {
+      "title": "Market research",
+      "desc": "AI summarizes the market, audience, and competitors — the starting point for strategy.",
+      "running": "AI is researching the market…",
+      "brief": "Research brief",
+      "regenerate": "Re-run research",
+      "empty": "No research brief yet. Hit “Start research” to have AI summarize it.",
+      "next": "Go to strategy"
+    },
+    "strategy": {
+      "title": "Strategy — 4 docs",
+      "desc": "Persona, competitive landscape, positioning & messaging, channel & content plan — edit or AI-refine each one.",
+      "empty": "No strategy docs yet",
+      "generateAll": "Generate all 4 docs",
+      "regenerateAll": "Regenerate all",
+      "needResearch": "A research brief is required before generating strategy docs",
+      "progress": "AI is writing doc {done}/{total}…",
+      "next": "Go to creatives",
+      "refine": "Refine",
+      "refinePlaceholder": "Tell AI what to change, e.g. “focus on younger teens, make it more playful”",
+      "refining": "Refining…",
+      "refineDone": "Document refined",
+      "saved": "Document saved"
+    },
+    "docKind": {
+      "persona": "Persona",
+      "competition": "Competition",
+      "positioning": "Positioning",
+      "channel_plan": "Channel plan"
+    },
+    "creatives": {
+      "title": "Creatives",
+      "desc": "Short ad scripts segmented every 3 seconds with headline and hook — approve the ones you like.",
+      "count": "Count",
+      "generate": "Generate creatives",
+      "generateMore": "Generate more",
+      "needDocs": "Strategy docs are required before generating creatives",
+      "progress": "AI is generating {done}/{total}…",
+      "empty": "No creatives yet — pick formats and generate.",
+      "headline": "Headline",
+      "hook": "Hook",
+      "script": "Script",
+      "approve": "Approve",
+      "unapprove": "Unapprove",
+      "approvedTag": "Approved",
+      "edit": "Edit",
+      "delete": "Delete",
+      "deleteTitle": "Delete creative",
+      "deleteMessage": "Delete creative “{title}”? This cannot be undone.",
+      "deleted": "Creative deleted",
+      "saved": "Creative saved"
+    },
+    "format": {
+      "video_30s": "30s video",
+      "video_15s": "15s video",
+      "ugc_script": "UGC script",
+      "ad_copy": "Ad copy"
+    },
+    "review": {
+      "title": "Review & Refine",
+      "desc": "Check readiness before launch, jump back to refine any part, then copy everything as Markdown.",
+      "checkResearch": "Research brief ready",
+      "checkDocs": "All 4 strategy docs present (now {n})",
+      "checkCreatives": "At least 1 creative (now {n})",
+      "checkApproved": "At least 1 approved creative (now {n})",
+      "go": "Go",
+      "copyAll": "Copy all as Markdown",
+      "copied": "Copied"
+    },
+    "job": {
+      "done": "Job finished",
+      "cancelled": "Job cancelled",
+      "busy": "An AI job is already running — wait or cancel it first",
+      "cancel": "Cancel"
+    },
+    "work": {
+      "back": "All campaigns",
+      "backToList": "Back to list",
+      "notFound": "Campaign not found (it may have been deleted)",
+      "defaultModel": "Default",
+      "exportTitle": "Marketing plan — {title}"
+    }
   }
 }
